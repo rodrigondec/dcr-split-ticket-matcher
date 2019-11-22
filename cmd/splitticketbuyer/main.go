@@ -65,6 +65,9 @@ func main() {
 
 	err = buyer.BuySplitTicket(ctx, cfg)
 	for err != nil {
+		go buyer.WatchMatcherWaitingList(ctx, cfg.MatcherHost, cfg.MatcherCertFile,
+		reporter)
+
 		err = buyer.BuySplitTicket(ctx, cfg)
 	}
 	if err == nil {
